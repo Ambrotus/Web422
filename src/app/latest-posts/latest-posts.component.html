@@ -1,0 +1,39 @@
+<div class="widget latest-posts">
+
+    <header>
+      <h3 class="h6">Latest Posts</h3>
+    </header>
+
+    <div class="blog-posts">
+        <!-- The idea is that we must render one "item" link for every "post"in the "posts" array -->
+        <a  [routerLink]="['/post', post._id]" *ngFor="let post of blogPosts">
+
+            <div class="item d-flex align-items-center">
+
+                <!-- Its "image" element must show the post's "featuredImage" -->
+                <div class="image">
+                    <img [src]="post.featuredImage" alt="..." class="img-fluid">
+                </div>
+
+                <!-- Its "title" element must show the post's "title" -->
+                <div class="title">
+                    <strong>{{ post.title }}</strong>
+
+                    <div class="d-flex align-items-center">
+
+                        <!-- Its "views" element must show the post's "views" -->
+                        <div class="views">
+                            <i class="icon-eye"></i>{{ post.views }}
+                        </div>
+
+                        <!-- Its "comments" element must show the number of comments, ie comments.length -->
+                        <div class="comments">
+                            <i class="icon-comment"></i>{{post.comments.length}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

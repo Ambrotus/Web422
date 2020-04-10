@@ -1,0 +1,119 @@
+<div class="post-single">
+
+    <!-- The "post-thumbnail" must show the post's "featuredImage" -->
+    <div class="post-thumbnail">
+        <img [src]="post.featuredImage" alt="..." class="img-fluid">
+    </div>
+
+
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+
+            <!-- The "category" must show the post's "category" -->
+            <div class="category">
+                <a routerLink>{{post.category}}</a>
+            </div>
+
+        </div>
+
+        <!-- The <h1>...</h1> element must show the post's "title" -->
+        <h1>
+            {{post.title}}
+            <a routerLink>
+                <i class="fa fa-bookmark-o"></i>
+            </a>
+        </h1>
+
+        <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a routerLink
+                class="author d-flex align-items-center flex-wrap">
+
+                <!-- The "avatar" must be changed to show "/assets/img/user.svg" -->
+                <div class="avatar">
+                    <img src="/assets/img/user.svg" alt="..." class="img-fluid">
+                </div>
+
+                <!-- The "title" (directly beneath avatar) must show the post's "author" -->
+                <div class="title">
+                    <span>{{post.postedBy}}</span>
+                </div>
+
+            </a>
+            <div class="d-flex align-items-center flex-wrap">
+
+                <!-- The "date" element (next to the clock) must show the post's "postDate" -->
+                <div class="date">
+                    <i class="icon-clock"></i> {{post.postDate |date:'mediumDate'}}
+                </div>
+
+                <!-- The "views" element (next to the eye) must show the post's"views" -->
+                <div class="views">
+                    <i class="icon-eye"></i> {{post.views}}
+                </div>
+
+                <!-- The"comments" element must show the number of comments, ie comments.length -->
+                <div class="comments meta-last">
+                    <i class="icon-comment"></i>{{post.comments.length}}
+                </div>
+
+            </div>
+        </div>
+
+        <!-- The "post-body" innerHTML property must be set to the post's "post" -->
+        <div class="post-body" [innerHtml]="post.post"></div>
+
+        <!-- The "post-tags" must show one "<a href="#" class="tag">...</a> element for every tag in the post's "tags" array
+            such that the content of the <a> shows the value of a tag used in the post -->
+        <!-- may need to put the for loop in the routerlink tag -->
+       <div class="post-tags" *ngFor="let tag of post.tags">  <!-- might need fixing -->
+            <a [routerLink]="['/blog']" [queryParams]="{ tag: tag.substring(1) }" class="tag">{{tag}}</a>
+        </div>
+
+        <!-- The "no-of-comments" must show the number of comments, ie comments.length -->
+        <div class="post-comments">
+            <header>
+                <h3 class="h6">Post Comments<span class="no-of-comments">{{post.comments.length}}</span></h3>
+            </header>
+
+            <!-- To complete this, we must iterate over the "comments" array and display a <div class="comment">...</div>" for every comment in the array -->
+            <div class="comment" *ngFor ="let comment of post.comments">
+
+                <div class="comment-header d-flex justify-content-between">
+                    <div class="user d-flex align-items-center">
+                        <div class="image"><img src="/assets/img/user.svg" alt="..." class="img-fluid rounded-circle">
+                        </div>
+
+                        <!-- The "title" should show the current comment's "author" -->
+                        <div class="title"><strong>{{comment.author}}</strong><span class="date">{{comment.date | date:'mediumDate'}}</span></div>
+                    </div>
+                </div>
+
+                <!-- The "comment body" innerHTML property must be set to the current comment's "comment" -->
+                <div class="comment-body" [innerHtml] ="comment.comment"></div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="add-comment">
+            <header>
+                <h3 class="h6">Leave a reply</h3>
+            </header>
+            <form class="commenting-form" (ngSubmit)="submitComment()">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="text" name="username" id="username" placeholder="Name" class="form-control" [(ngModel)] = "commentName">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <textarea name="usercomment" id="usercomment" placeholder="Type your comment"
+                            class="form-control" [(ngModel)] = "commentText"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

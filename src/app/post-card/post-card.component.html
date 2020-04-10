@@ -1,0 +1,66 @@
+<!-- this div may not be needed, just the inner stuff -->
+<!-- <div class="post col-xl-6"> -->
+
+    <!-- Its "post-thumbnail" element must show the post's "featuredImage" -->
+    <div class="post-thumbnail">
+        <a [routerLink]="['/post', post._id]">
+            <img [src]="post.featuredImage" alt="..." class="img-fluid">
+        </a></div>
+
+
+
+
+
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+            <!-- Its "date meta-last" element must show the post's "postDate" -->
+            <div class="date meta-last">
+                {{post.postDate |date:'mediumDate'}}
+            </div>
+
+            <!-- Its "cateogory" element must show the post's "category" -->
+            <div class="category"><a routerLink>
+                    {{post.category}}
+                </a>
+            </div>
+        </div>
+
+        <!-- Its "<h3 class="h4">element must show the post's "title" -->
+        <!-- also we went to use routerlink as we made the routing for this -->
+        <a [routerLink]="['/post', post._id]">
+            <h3 class="h4">{{post.title}}</h3>
+        </a>
+        <!-- Its "<p class="text-muted"> element must be changed to a <div> element instead
+            (ie: "<div class="text-muted">...</div>".
+            Also its "innerHtml" property must be set to the post's "post" -->
+        <div class="text-muted" [innerHTML]="post.post">
+            <!-- {{post.post}}  this didnt work, it still showed <p> so try as an attribute of the div tag -->
+        </div>
+
+        <footer class="post-footer d-flex align-items-center">
+            <a routerLink class="author d-flex align-items-center flex-wrap">
+
+                <!-- Its "avatar" image must be changed to "/assets/img/user.svg -->
+                <div class="avatar">
+                    <img src="/assets/img/user.svg" alt="..." class="img-fluid">
+                </div>
+
+                <!-- Its "title" element must show the post's "postedBy" -->
+                <div class="title">
+                    <span>{{post.postedBy}}</span>
+                </div>
+            </a>
+
+            <!-- Its "date" element (next to the clock) must show the post's "postDate" -->
+            <div class="date">
+                <i class="icon-clock"></i> {{post.postDate |date:'mediumDate'}}
+            </div>
+
+            <!-- Its "meta-last" element must show the number of comments, ie comments.length -->
+            <div class="comments meta-last">
+                <i class="icon-comment"></i>{{post.comments.length}}
+            </div>
+
+        </footer>
+    </div>
+<!-- </div> -->
